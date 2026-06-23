@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor E. Birkle III | Software & Systems Portfolio</title>
+    <!-- Tailwind CSS for high-end modern layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        spacex: '#CC0000',
+                        slate950: '#030712',
+                        slate900: '#0f172a',
+                        slate800: '#1e293b',
+                    },
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030712;
+            color: #f3f4f6;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #CC0000;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden selection:bg-red-600 selection:text-white">
+
+    <!-- NAVIGATION HEADER -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-slate950/80 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2">
+                <span class="text-white font-extrabold tracking-wider text-lg">VICTOR E. BIRKLE III</span>
+                <span class="bg-red-600/15 text-red-500 border border-red-500/30 text-[10px] px-2 py-0.5 rounded font-mono font-bold">PORTFOLIO.SYS</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-400">
+                <a href="#about" class="hover:text-white transition">About</a>
+                <a href="#projects" class="hover:text-white transition">Interactive Projects</a>
+                <a href="#experience" class="hover:text-white transition">Experience</a>
+                <a href="#contact" class="hover:text-white transition">Contact</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a href="mailto:victor.birkle@students.maestrocolleg.edu" class="bg-red-600 hover:bg-red-700 text-white text-xs px-4 py-2 rounded font-bold tracking-wider transition uppercase shadow-md shadow-red-600/20">
+                    Contact Engine
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="min-h-screen pt-32 pb-20 flex items-center relative overflow-hidden bg-gradient-to-b from-slate950 via-slate950 to-slate900">
+        <!-- Interactive background grid effect -->
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-red-600/10 rounded-full blur-[120px]"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]"></div>
+
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 w-full">
+            <div class="lg:col-span-7 flex flex-col justify-center space-y-6">
+                <div class="inline-flex items-center gap-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-full text-xs text-red-400 font-mono font-bold w-fit">
+                    <span class="w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
+                    TARGETING FALL 2026 SPACEX SOFTWARE ENGINEERING INTERNSHIP
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-none">
+                    Engineering Software at the <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-500">Hardware Interface</span>
+                </h1>
+                <p class="text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed">
+                    Software Engineering student combining a rigorous foundation in **Electronics Engineering Technology** with real-time systems programming. Specialist in building deterministic test frameworks, low-level micro-controller firmware, and high-throughput data sync telemetry pipelines.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="#projects" class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-lg text-sm transition tracking-wider shadow-lg shadow-red-600/30">
+                        LAUNCH SIMULATORS
+                    </a>
+                    <a href="#experience" class="bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 font-bold px-6 py-3 rounded-lg text-sm transition">
+                        REVIEW EXPERIENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Interactive Terminal Preview Box -->
+            <div class="lg:col-span-5 flex items-center">
+                <div class="w-full bg-slate950 border border-slate-800 rounded-xl overflow-hidden shadow-2xl relative">
+                    <div class="bg-slate-900 px-4 py-3 flex items-center justify-between border-b border-slate-800">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400">system_diagnostics.sh</span>
+                        <div class="w-4"></div>
+                    </div>
+                    <div class="p-6 font-mono text-xs text-emerald-400 space-y-4 leading-relaxed max-h-[350px] overflow-y-auto">
+                        <div>
+                          <span class="text-slate-500">[rasvibir@terminal ~]$</span> ./init_candidate.sh
+                        </div>
+                        <div class="text-slate-300">
+                          Initializing Victor E. Birkle III...<br>
+                          <span class="text-emerald-500">✔</span> Active BS Software Engineering student (GPA 3.82/4.0)<br>
+                          <span class="text-emerald-500">✔</span> AS Electronics Engineering Technology (ITT Tech)<br>
+                          <span class="text-emerald-500">✔</span> ITAR & FDA Compliant Documentation Certified<br>
+                        </div>
+                        <div>
+                          <span class="text-slate-500">[rasvibir@terminal ~]$</span> check_capabilities --low-level
+                        </div>
+                        <div class="text-slate-400">
+                          - Micro-controllers: STM32, Teensy, Arduino, ESP32<br>
+                          - Bus Diagnostics: SPI, I2C, CAN, UART, RS-485<br>
+                          - Languages: C/C++, Python, ASM, SQL, JavaScript
+                        </div>
+                        <div class="animate-pulse text-white">
+                          <span class="text-slate-500">[rasvibir@terminal ~]$</span> <span class="bg-white text-black px-1">█</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE STRATEGY / ABOUT SECTION -->
+    <section id="about" class="py-24 border-t border-slate-900 bg-slate950 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <h2 class="text-xs uppercase font-extrabold tracking-widest text-red-500">Architectural Philosophy</h2>
+                <h3 class="text-3xl sm:text-4xl font-bold text-white">The Hardware-Software Congruence</h3>
+                <p class="text-slate-400">
+                    To build highly autonomous satellites, flight vehicles, and spacecraft systems, software developers must understand how physical constraints impact execution speeds, bus communications, and memory safety.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Concept 1 -->
+                <div class="bg-slate-900/50 border border-slate-800 p-8 rounded-xl space-y-4 hover:border-red-500/40 transition">
+                    <div class="w-12 h-12 rounded-lg bg-red-600/15 border border-red-500/30 flex items-center justify-center text-red-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-white">Low-Level Determinism</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Highly optimized, interrupt-safe embedded C code that respects CPU and memory limitations, ensuring real-time response targets are met flawlessly under any operating stress.
+                    </p>
+                </div>
+                <!-- Concept 2 -->
+                <div class="bg-slate-900/50 border border-slate-800 p-8 rounded-xl space-y-4 hover:border-red-500/40 transition">
+                    <div class="w-12 h-12 rounded-lg bg-red-600/15 border border-red-500/30 flex items-center justify-center text-red-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-white">High-Availability Telemetry</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Data ingestion pipelines designed for remote, variable networks—incorporating offline atomic SQLite staging, fast asynchronous synchronization buffers, and multi-tenant parsing.
+                    </p>
+                </div>
+                <!-- Concept 3 -->
+                <div class="bg-slate-900/50 border border-slate-800 p-8 rounded-xl space-y-4 hover:border-red-500/40 transition">
+                    <div class="w-12 h-12 rounded-lg bg-red-600/15 border border-red-500/30 flex items-center justify-center text-red-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    </div>
+                    <h4 class="text-lg font-bold text-white">Automated HITL Rig Testing</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Creating hardware-in-the-loop (HITL) test automation tools to safely mock signals, scan multi-voltage rails, capture trace data, and guarantee continuous integration passes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE PROJECTS DEMO SECTION -->
+    <section id="projects" class="py-24 bg-slate900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-3xl space-y-4 mb-16">
+                <h2 class="text-xs uppercase font-extrabold tracking-widest text-red-500">Live Demonstrations</h2>
+                <h3 class="text-3xl sm:text-4xl font-bold text-white">Interactive Engineering Sandbox</h3>
+                <p class="text-slate-400 text-sm sm:text-base">
+                    Explore real-time emulated systems constructed to mimic the physical constraints of avionics signal parsing, telemetry dropouts, and logic analyzer diagnostics.
+                </p>
+            </div>
+
+            <!-- GRID OF PROJECTS -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+                <!-- PROJECT 1: DIGITAL SIGNAL DSP & FFT VISUALIZER -->
+                <div class="bg-slate950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-mono text-red-400 font-semibold">[PROJ-01: AVIONICS DSP]</span>
+                            <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] px-2 py-0.5 rounded font-mono uppercase">Emulated Live</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Audio & Sensor DSP Engine (C++ Framework)</h4>
+                        <p class="text-slate-400 text-sm">
+                            A real-time signal generator modeling Fast Fourier Transforms (FFT). Simulates processing high-frequency vibrations, telemetry noise filtering, and signal reconstruction.
+                        </p>
+                    </div>
+
+                    <!-- Live Signal Canvas Simulator -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-2">
+                                <label class="text-xs font-mono text-slate-400">Waveform:</label>
+                                <select id="waveSelect" class="bg-slate950 border border-slate-800 text-white rounded px-2 py-1 text-xs">
+                                    <option value="sine">Sine Wave (Pure Tone)</option>
+                                    <option value="square">Square Wave (Logic Bus)</option>
+                                    <option value="sawtooth">Sawtooth Wave (Motor Actuator)</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <label class="text-xs font-mono text-slate-400">Freq:</label>
+                                <input type="range" id="freqSlider" min="1" max="10" value="3" class="w-20 accent-red-600">
+                            </div>
+                        </div>
+
+                        <div class="relative bg-slate950 border border-slate-800 rounded-lg overflow-hidden h-36">
+                            <canvas id="dspCanvas" class="w-full h-full"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-900 pt-4 flex justify-between items-center">
+                        <span class="text-xs font-mono text-slate-500">Platform: Teensy 4.0 / C++ JUCE</span>
+                        <a href="#experience" class="text-red-400 hover:text-red-300 font-semibold text-xs flex items-center gap-1 transition">
+                            View Tech Details <span class="text-sm">→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PROJECT 2: ASYNC OFFLINE-FIRST TELEMETRY PIPELINE -->
+                <div class="bg-slate950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-mono text-red-400 font-semibold">[PROJ-02: TELEMETRY STORAGE]</span>
+                            <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] px-2 py-0.5 rounded font-mono uppercase">Interactive Pipeline</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Offline-First Ingestion Pipeline (Python/SQLite/Postgres)</h4>
+                        <p class="text-slate-400 text-sm">
+                            Emulates remote telemetry logging with atomic transactional staging. Test the pipeline's robustness against variable network connectivity dropouts.
+                        </p>
+                    </div>
+
+                    <!-- Live Telemetry Sync Simulator -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <button id="toggleNetworkBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3 py-1.5 rounded transition">
+                                Network: ONLINE
+                            </button>
+                            <button id="addPacketBtn" class="bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-3 py-1.5 rounded transition">
+                                Send Sensor Frame
+                            </button>
+                        </div>
+
+                        <!-- Pipeline Flow Diagram -->
+                        <div class="grid grid-cols-3 gap-2 relative">
+                            <!-- Local Queue -->
+                            <div class="bg-slate950 border border-slate-800 rounded p-2 text-center flex flex-col justify-between h-28">
+                                <div class="text-[10px] font-mono text-slate-400 uppercase">Local SQLite Staging</div>
+                                <div id="localQueueCount" class="text-2xl font-bold text-white">0</div>
+                                <div class="text-[9px] text-slate-500 font-mono">buffered frames</div>
+                            </div>
+                            <!-- Network Channel -->
+                            <div class="flex flex-col items-center justify-center h-28">
+                                <span class="text-[10px] font-mono text-slate-400 uppercase">Channel</span>
+                                <div id="networkLine" class="w-full h-1 bg-emerald-500 my-2 transition-all duration-300"></div>
+                                <span id="networkStatusText" class="text-[10px] font-mono text-emerald-400">CONNECTIVITY: OK</span>
+                            </div>
+                            <!-- Server Ingestion -->
+                            <div class="bg-slate950 border border-slate-800 rounded p-2 text-center flex flex-col justify-between h-28">
+                                <div class="text-[10px] font-mono text-slate-400 uppercase">Server PostgreSQL</div>
+                                <div id="serverDbCount" class="text-2xl font-bold text-white">0</div>
+                                <div class="text-[9px] text-slate-500 font-mono">secured frames</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-900 pt-4 flex justify-between items-center">
+                        <span class="text-xs font-mono text-slate-500">Stack: Python (Kivy) / SQLite / Postgres</span>
+                        <a href="#experience" class="text-red-400 hover:text-red-300 font-semibold text-xs flex items-center gap-1 transition">
+                            View Tech Details <span class="text-sm">→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PROJECT 3: INTERACTIVE LOGIC ANALYZER TIMING DIAGRAM -->
+                <div class="bg-slate950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between space-y-6 lg:col-span-2">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-mono text-red-400 font-semibold">[PROJ-03: SYSTEM DECONSTRUCTION]</span>
+                            <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 text-[10px] px-2 py-0.5 rounded font-mono uppercase">Diagnostics Visualizer</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white">Interrupt vs. SPI Frame Analyzer (HITL Debugging)</h4>
+                        <p class="text-slate-400 text-sm">
+                            Interact with the timeline to see how high-priority Interrupt Service Routines (ISRs) clashed with active SPI transfers, causing data packet pointer corruption on critical avionics buses—the issue I solved at ISS Inc.
+                        </p>
+                    </div>
+
+                    <!-- Interactive Logic Trace Diagram -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-4">
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="font-mono text-slate-400">TRACE STATUS: <span id="traceStatus" class="text-red-500 font-bold">CONFLICT DETECTED</span></span>
+                            <button id="togglePatchBtn" class="bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-3 py-1.5 rounded transition">
+                                Apply Double-Buffer Patch
+                            </button>
+                        </div>
+
+                        <!-- Canvas timing trace -->
+                        <div class="relative bg-slate950 border border-slate-800 rounded-lg overflow-hidden h-40">
+                            <canvas id="timingCanvas" class="w-full h-full"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-900 pt-4 flex justify-between items-center">
+                        <span class="text-xs font-mono text-slate-500">Framework: Hard-Hardware Emulation Rig / Logic Captures</span>
+                        <a href="#experience" class="text-red-400 hover:text-red-300 font-semibold text-xs flex items-center gap-1 transition">
+                            View Tech Details <span class="text-sm">→</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- GITHUB REPOSITORIES SHOWCASE SECTION -->
+            <div class="mt-20 border-t border-slate-800 pt-16">
+                <div class="max-w-3xl space-y-4 mb-12">
+                    <span class="text-xs uppercase font-mono tracking-widest text-red-500">// PUBLIC REPOSITORIES</span>
+                    <h4 class="text-2xl font-bold text-white">Active Open-Source Codebases</h4>
+                    <p class="text-slate-400 text-sm">
+                        Inspect the raw, low-level implementations and structural system architectures hosted on GitHub.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Repo 1: uXu -->
+                    <div class="bg-slate950 border border-slate-800 rounded-xl p-6 hover:border-red-500/40 transition flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-mono text-amber-500 font-bold">RASvibir/uXu</span>
+                                <span class="bg-red-600/10 text-red-500 border border-red-500/20 text-[10px] px-2 py-0.5 rounded font-mono font-bold">Active System</span>
+                            </div>
+                            <h5 class="text-lg font-bold text-white">uXu — Micro-Exchange Utility</h5>
+                            <p class="text-slate-400 text-xs leading-relaxed">
+                                A high-performance, low-latency serialization and asynchronous data-framing protocol engineered for bare-metal microcontroller communications (Teensy/STM32) and telemetry streams. Minimizes overhead using bitwise framing, deterministic packet boundaries, and fast transactional CRC-16 checksum verification.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-[10px] font-mono text-slate-500">Language: C++ / Python</span>
+                            <a href="https://github.com/RASvibir/uXu" target="_blank" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-white font-mono text-xs px-3 py-1.5 rounded transition flex items-center gap-1.5">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z"></path></svg>
+                                inspect_repo.sh
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Repo 2: Portfolio -->
+                    <div class="bg-slate950 border border-slate-800 rounded-xl p-6 hover:border-red-500/40 transition flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-mono text-emerald-500 font-bold">RASvibir/Victor_E._Birkle_III_DEV-Portfolio</span>
+                                <span class="bg-red-600/10 text-red-500 border border-red-500/20 text-[10px] px-2 py-0.5 rounded font-mono font-bold">Main System</span>
+                            </div>
+                            <h5 class="text-lg font-bold text-white">Interactive Systems Engineering Portfolio</h5>
+                            <p class="text-slate-400 text-xs leading-relaxed">
+                                The architectural container for this deployment. Developed to demonstrate systems-thinking, featuring multi-modal simulators for signal analytics, telemetry sync routines, and hardware-in-the-loop (HITL) diagnostics.
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-[10px] font-mono text-slate-500">Language: HTML / Tailwind CSS / Vanilla JS</span>
+                            <a href="https://github.com/RASvibir/Victor_E._Birkle_III_DEV-Portfolio" target="_blank" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-white font-mono text-xs px-3 py-1.5 rounded transition flex items-center gap-1.5">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z"></path></svg>
+                                inspect_repo.sh
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TECHNICAL EXPERIENCE SECTION -->
+    <section id="experience" class="py-24 bg-slate950 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-3xl space-y-4 mb-16">
+                <h2 class="text-xs uppercase font-extrabold tracking-widest text-red-500">Validated Timeline</h2>
+                <h3 class="text-3xl sm:text-4xl font-bold text-white">Professional History</h3>
+                <p class="text-slate-400">
+                    A record of engineering execution across hardware testing, industrial networking, and technical database administration.
+                </p>
+            </div>
+
+            <!-- Experience Timeline -->
+            <div class="relative border-l border-slate-800 ml-4 md:ml-8 space-y-12">
+                
+                <!-- OpenCity -->
+                <div class="relative pl-8 md:pl-12">
+                    <span class="absolute left-0 top-1.5 -translate-x-1/2 w-4 h-4 rounded-full bg-red-600 border border-slate950 shadow-lg shadow-red-600/50"></span>
+                    <div class="space-y-2">
+                        <span class="text-xs font-mono text-red-500 font-semibold">May 2022 – August 2024</span>
+                        <h4 class="text-xl font-bold text-white">Data Research Specialist <span class="text-slate-400 font-normal">| OpenCity</span></h4>
+                        <p class="text-xs font-mono text-slate-500">Boston, MA (Remote)</p>
+                        <ul class="list-disc pl-4 text-slate-400 text-sm space-y-2 max-w-4xl">
+                            <li>Developed automated Python scripts to preprocess, clean, and validate massive multi-modal training datasets, contributing directly to the accuracy optimization of conversational AI models.</li>
+                            <li>Constructed continuous integration (CI) regression testing pipelines for embedded robotics simulations, reducing build errors by 22% across multi-disciplinary teams.</li>
+                            <li>Built a real-time log-parsing utility in Python that isolated and categorized application state anomalies, reducing diagnostic triage times from hours to minutes.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ISS Inc. -->
+                <div class="relative pl-8 md:pl-12">
+                    <span class="absolute left-0 top-1.5 -translate-x-1/2 w-4 h-4 rounded-full bg-red-600 border border-slate950 shadow-lg shadow-red-600/50"></span>
+                    <div class="space-y-2">
+                        <span class="text-xs font-mono text-red-500 font-semibold">February 2020 – February 2022</span>
+                        <h4 class="text-xl font-bold text-white">Production Inspection & Functional Testing Specialist <span class="text-slate-400 font-normal">| ISS Inc.</span></h4>
+                        <p class="text-xs font-mono text-slate-500">Champaign, IL</p>
+                        <ul class="list-disc pl-4 text-slate-400 text-sm space-y-2 max-w-4xl">
+                            <li>Assembled, wired, and debugged complex medical research devices utilizing RF, spectrometry, and high-frequency fluorescence imaging technologies.</li>
+                            <li>Designed and executed hardware-in-the-loop (HITL) test protocols, applying specialized C code on test rigs to validate logic gates, signal modulation, and multi-voltage rails.</li>
+                            <li>Isolated intermittent system failures under high thermal load environments by executing real-time logic analyzer captures and trace analysis on SPI and I2C buses.</li>
+                            <li>Authored and managed controlled software/hardware integration test reports to meet rigorous, FDA-regulated medical device manufacturing standards.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- CMI -->
+                <div class="relative pl-8 md:pl-12">
+                    <span class="absolute left-0 top-1.5 -translate-x-1/2 w-4 h-4 rounded-full bg-red-600 border border-slate950 shadow-lg shadow-red-600/50"></span>
+                    <div class="space-y-2">
+                        <span class="text-xs font-mono text-red-500 font-semibold">February 2017 – January 2020</span>
+                        <h4 class="text-xl font-bold text-white">Field Service Engineer & Software Integrator <span class="text-slate-400 font-normal">| CMI</span></h4>
+                        <p class="text-xs font-mono text-slate-500">Champaign, IL</p>
+                        <ul class="list-disc pl-4 text-slate-400 text-sm space-y-2 max-w-4xl">
+                            <li>Programmed and deployed a secure, lightweight mobile reporting application using Python (Kivy) and SQLite, enabling instant offline-first field synchronization to central enterprise servers.</li>
+                            <li>Engineered custom calibration software for chemical mixing and peristaltic pump injection controllers, ensuring strict pH and concentration tolerances of ±0.05.</li>
+                            <li>Built automated data-pipeline parsers that mapped legacy industrial equipment logs to PostgreSQL, standardizing maintenance planning and reducing system downtime by 35%.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Kimball Electronics -->
+                <div class="relative pl-8 md:pl-12">
+                    <span class="absolute left-0 top-1.5 -translate-x-1/2 w-4 h-4 rounded-full bg-red-600 border border-slate950 shadow-lg shadow-red-600/50"></span>
+                    <div class="space-y-2">
+                        <span class="text-xs font-mono text-red-500 font-semibold">March 2015 – July 2016</span>
+                        <h4 class="text-xl font-bold text-white">In-Circuit Testing Specialist (Intern) <span class="text-slate-400 font-normal">| Kimball Electronics</span></h4>
+                        <p class="text-xs font-mono text-slate-500">Jasper, IN</p>
+                        <ul class="list-disc pl-4 text-slate-400 text-sm space-y-2 max-w-4xl">
+                            <li>Programmed and ran automated test routines on high-density PCBs using Agilent/HP 3070 and Teradyne ICT machines, validating flight-critical avionics traces.</li>
+                            <li>Utilized SCPI commands and Python wrappers to automate benchtop instrumentation (oscilloscopes, Fluke multi-meters) for fast, iterative loop measurements.</li>
+                            <li>Documented test coverage matrices and certified assembly runs under strict FDA medical and ITAR defense aerospace regulations.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ACCREDITED EDUCATION -->
+    <section class="py-24 bg-slate900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-3xl space-y-4 mb-16">
+                <h2 class="text-xs uppercase font-extrabold tracking-widest text-red-500">Academic Underpinnings</h2>
+                <h3 class="text-3xl sm:text-4xl font-bold text-white">Education & Credentials</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-slate950 border border-slate-800 p-8 rounded-2xl space-y-4">
+                    <span class="bg-red-500/10 text-red-400 border border-red-500/20 text-xs px-2.5 py-1 rounded font-mono font-bold">ACCREDITED PROGRAM</span>
+                    <h4 class="text-2xl font-bold text-white">Maestro University</h4>
+                    <p class="text-slate-400 text-sm">Active Enrollment — Expected Graduation: June 2027</p>
+                    <p class="text-white font-semibold text-lg font-mono">Bachelor of Science in Software Engineering</p>
+                    <div class="border-t border-slate-800 pt-4 space-y-2 text-sm text-slate-400">
+                        <p><strong>Cumulative GPA:</strong> 3.82 / 4.00</p>
+                        <p><strong>Coursework:</strong> Real-Time Embedded Systems, Computer Architecture, Distributed Software Systems, Operating System Internals</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate950 border border-slate-800 p-8 rounded-2xl space-y-4 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <span class="bg-slate-800 text-slate-400 border border-slate-700 text-xs px-2.5 py-1 rounded font-mono font-bold">GRADUATE</span>
+                        <h4 class="text-2xl font-bold text-white">ITT Technical Institute</h4>
+                        <p class="text-slate-400 text-sm">Graduated: December 2014</p>
+                        <p class="text-white font-semibold text-lg font-mono">AS in Electronics Engineering Technology</p>
+                    </div>
+                    <div class="border-t border-slate-800 pt-4 text-sm text-slate-400">
+                        <p>Detailed study of analog/digital signals, microprocessors, operational amplifiers, and radio-frequency (RF) filtering diagnostics.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FOOTER -->
+    <section id="contact" class="py-24 bg-slate950 border-t border-slate-900 relative">
+        <div class="max-w-7xl mx-auto px-6 text-center space-y-8 relative z-10">
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Connect with the Engineer</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">
+                Ready to take initiative, relocate to any SpaceX operational facility, and own mission objectives. Let's arrange a deep-dive technical screening.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 text-sm font-mono pt-4">
+                <a href="mailto:victor.birkle@students.maestrocolleg.edu" class="flex items-center gap-2 hover:text-red-500 transition">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    victor.birkle@students.maestrocolleg.edu
+                </a>
+                <span class="hidden sm:inline text-slate-700">|</span>
+                <span class="flex items-center gap-2 text-slate-300">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 00.993.771H11a1 1 0 011 1v1zM3 19v-8.93a2 2 0 01.07-.53l1.21-3.62A2 2 0 016.18 5h11.64a2 2 0 011.9 1.32l1.2 3.62A2 2 0 0121 11.07V19a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg>
+                    (205) 828-0420
+                </span>
+            </div>
+
+            <div class="flex justify-center gap-6 pt-6">
+                <a href="https://github.com/rasvibir" class="bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 px-5 py-3 rounded-lg text-sm font-bold transition flex items-center gap-2">
+                    GitHub Profile
+                </a>
+                <a href="https://linkedin.com/in/victor-birkle" class="bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 px-5 py-3 rounded-lg text-sm font-bold transition flex items-center gap-2">
+                    LinkedIn Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCRIPTS FOR INTERACTIVE SIMULATIONS -->
+    <script>
+        // --- 1. AUDIO DSP CANVAS SIMULATOR ---
+        const dspCanvas = document.getElementById('dspCanvas');
+        const dspCtx = dspCanvas.getContext('2d');
+        const waveSelect = document.getElementById('waveSelect');
+        const freqSlider = document.getElementById('freqSlider');
+
+        function resizeDspCanvas() {
+            dspCanvas.width = dspCanvas.parentElement.clientWidth;
+            dspCanvas.height = dspCanvas.parentElement.clientHeight;
+        }
+        window.addEventListener('resize', resizeDspCanvas);
+        resizeDspCanvas();
+
+        let time = 0;
+        function drawDsp() {
+            dspCtx.clearRect(0, 0, dspCanvas.width, dspCanvas.height);
+            
+            // Draw background coordinate grids
+            dspCtx.strokeStyle = '#1e293b';
+            dspCtx.lineWidth = 1;
+            for (let i = 0; i < dspCanvas.width; i += 40) {
+                dspCtx.beginPath();
+                dspCtx.moveTo(i, 0);
+                dspCtx.lineTo(i, dspCanvas.height);
+                dspCtx.stroke();
+            }
+            for (let j = 0; j < dspCanvas.height; j += 30) {
+                dspCtx.beginPath();
+                dspCtx.moveTo(0, j);
+                dspCtx.lineTo(dspCanvas.width, j);
+                dspCtx.stroke();
+            }
+
+            // Draw wave
+            dspCtx.strokeStyle = '#CC0000';
+            dspCtx.lineWidth = 2.5;
+            dspCtx.beginPath();
+
+            const waveType = waveSelect.value;
+            const freq = parseFloat(freqSlider.value) * 0.02;
+
+            for (let x = 0; x < dspCanvas.width; x++) {
+                let y = dspCanvas.height / 2;
+                if (waveType === 'sine') {
+                    y += Math.sin((x * freq) + time) * 40;
+                } else if (waveType === 'square') {
+                    y += Math.sign(Math.sin((x * freq) + time)) * 35;
+                } else if (waveType === 'sawtooth') {
+                    y += (((x * freq + time / 2) % 2) - 1) * 40;
+                }
+
+                if (x === 0) {
+                    dspCtx.moveTo(x, y);
+                } else {
+                    dspCtx.lineTo(x, y);
+                }
+            }
+            dspCtx.stroke();
+
+            // FFT frequency bars emulation
+            dspCtx.fillStyle = 'rgba(234, 179, 8, 0.45)';
+            const barWidth = 6;
+            for (let i = 0; i < dspCanvas.width; i += 12) {
+                // Generate simulated frequency components
+                let noise = Math.sin(i * 0.05 + time * 2) * 15;
+                let height = 10 + Math.abs(Math.sin(i * freq * 0.2 + time) * 50) + noise;
+                if (height < 5) height = 5;
+                dspCtx.fillRect(i, dspCanvas.height - height, barWidth, height);
+            }
+
+            time += 0.05;
+            requestAnimationFrame(drawDsp);
+        }
+        drawDsp();
+
+
+        // --- 2. ASYNC TELEMETRY SIMULATOR ---
+        const toggleNetworkBtn = document.getElementById('toggleNetworkBtn');
+        const addPacketBtn = document.getElementById('addPacketBtn');
+        const localQueueCount = document.getElementById('localQueueCount');
+        const networkLine = document.getElementById('networkLine');
+        const networkStatusText = document.getElementById('networkStatusText');
+        const serverDbCount = document.getElementById('serverDbCount');
+
+        let isOnline = true;
+        let localBuffer = 0;
+        let serverDb = 0;
+
+        toggleNetworkBtn.addEventListener('click', () => {
+            isOnline = !isOnline;
+            if (isOnline) {
+                toggleNetworkBtn.textContent = 'Network: ONLINE';
+                toggleNetworkBtn.className = 'bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3 py-1.5 rounded transition';
+                networkLine.className = 'w-full h-1 bg-emerald-500 my-2 transition-all duration-300';
+                networkStatusText.textContent = 'CONNECTIVITY: OK';
+                networkStatusText.className = 'text-[10px] font-mono text-emerald-400';
+                // Trigger auto sync with standard retry/flush delay
+                flushBuffer();
+            } else {
+                toggleNetworkBtn.textContent = 'Network: OFFLINE';
+                toggleNetworkBtn.className = 'bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-3 py-1.5 rounded transition';
+                networkLine.className = 'w-full h-1 bg-red-600 my-2 transition-all duration-300';
+                networkStatusText.textContent = 'CONNECTIVITY: LOST';
+                networkStatusText.className = 'text-[10px] font-mono text-red-500';
+            }
+        });
+
+        addPacketBtn.addEventListener('click', () => {
+            if (isOnline) {
+                serverDb++;
+                serverDbCount.textContent = serverDb;
+                // Tiny flash effect
+                serverDbCount.classList.add('text-emerald-400');
+                setTimeout(() => serverDbCount.classList.remove('text-emerald-400'), 200);
+            } else {
+                localBuffer++;
+                localQueueCount.textContent = localBuffer;
+                localQueueCount.classList.add('text-amber-400');
+                setTimeout(() => localQueueCount.classList.remove('text-amber-400'), 200);
+            }
+        });
+
+        function flushBuffer() {
+            if (!isOnline || localBuffer === 0) return;
+            // Flush single packets progressively to emulate real telemetry synchronization flow
+            localBuffer--;
+            serverDb++;
+            localQueueCount.textContent = localBuffer;
+            serverDbCount.textContent = serverDb;
+            setTimeout(flushBuffer, 300);
+        }
+
+
+        // --- 3. INTERACTIVE LOGIC ANALYZER TIMING DIAGRAM ---
+        const timingCanvas = document.getElementById('timingCanvas');
+        const timingCtx = timingCanvas.getContext('2d');
+        const togglePatchBtn = document.getElementById('togglePatchBtn');
+        const traceStatusText = document.getElementById('traceStatus');
+
+        let isPatched = false;
+
+        function resizeTimingCanvas() {
+            timingCanvas.width = timingCanvas.parentElement.clientWidth;
+            timingCanvas.height = timingCanvas.parentElement.clientHeight;
+        }
+        window.addEventListener('resize', resizeTimingCanvas);
+        resizeTimingCanvas();
+
+        togglePatchBtn.addEventListener('click', () => {
+            isPatched = !isPatched;
+            if (isPatched) {
+                togglePatchBtn.textContent = 'Revert to Raw Bug';
+                togglePatchBtn.className = 'bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs px-3 py-1.5 rounded transition';
+                traceStatusText.textContent = 'DETERMINISTIC BUFFER ACTIVE';
+                traceStatusText.className = 'text-emerald-500 font-bold';
+            } else {
+                togglePatchBtn.textContent = 'Apply Double-Buffer Patch';
+                togglePatchBtn.className = 'bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-3 py-1.5 rounded transition';
+                traceStatusText.textContent = 'CONFLICT DETECTED';
+                traceStatusText.className = 'text-red-500 font-bold';
+            }
+        });
+
+        let logicTime = 0;
+        function drawTiming() {
+            timingCtx.clearRect(0, 0, timingCanvas.width, timingCanvas.height);
+            
+            // Channel Labels
+            timingCtx.fillStyle = '#94a3b8';
+            timingCtx.font = '10px JetBrains Mono';
+            timingCtx.fillText("CH1: SPI Clock", 10, 30);
+            timingCtx.fillText("CH2: Data Frame", 10, 70);
+            timingCtx.fillText("CH3: ISR Priority Pin", 10, 110);
+
+            // Channel lines background
+            timingCtx.strokeStyle = '#334155';
+            timingCtx.lineWidth = 1;
+            [35, 75, 115].forEach(y => {
+                timingCtx.beginPath();
+                timingCtx.moveTo(150, y);
+                timingCtx.lineTo(timingCanvas.width, y);
+                timingCtx.stroke();
+            });
+
+            // Draw pulses
+            timingCtx.lineWidth = 2;
+            const startX = 150;
+            const endX = timingCanvas.width;
+
+            // CH1: SPI Clock (Standard continuous pulse trains)
+            timingCtx.strokeStyle = '#38bdf8';
+            timingCtx.beginPath();
+            let isUp = false;
+            for (let x = startX; x < endX; x += 15) {
+                const drawX = x - (logicTime % 15);
+                if (drawX < startX) continue;
+                timingCtx.lineTo(drawX, isUp ? 20 : 45);
+                isUp = !isUp;
+                timingCtx.lineTo(drawX, isUp ? 20 : 45);
+            }
+            timingCtx.stroke();
+
+            // CH2: SPI Data Buffer Frame (High-level packet frames)
+            timingCtx.strokeStyle = '#f43f5e';
+            timingCtx.beginPath();
+            timingCtx.moveTo(startX, 80);
+            for (let x = startX; x < endX; x++) {
+                // Create synthetic high packet boundaries
+                const wavePos = (x + logicTime) % 300;
+                const isPacketActive = wavePos < 200;
+                timingCtx.lineTo(x, isPacketActive ? 60 : 80);
+            }
+            timingCtx.stroke();
+
+            // CH3: High-Priority ISR Interrupt Triggers
+            timingCtx.strokeStyle = '#eab308';
+            timingCtx.beginPath();
+            timingCtx.moveTo(startX, 125);
+            for (let x = startX; x < endX; x++) {
+                const wavePos = (x + logicTime) % 150;
+                const isInterruptActive = wavePos > 130 && wavePos < 145;
+                timingCtx.lineTo(x, isInterruptActive ? 100 : 125);
+            }
+            timingCtx.stroke();
+
+            // Highlight collision if not patched
+            if (!isPatched) {
+                // Find where high interrupt conflicts with high packet frame
+                for (let x = startX; x < endX; x++) {
+                    const packetPos = (x + logicTime) % 300;
+                    const isPacketActive = packetPos < 200;
+
+                    const interruptPos = (x + logicTime) % 150;
+                    const isInterruptActive = interruptPos > 130 && interruptPos < 145;
+
+                    if (isPacketActive && isInterruptActive) {
+                        // Drawing translucent warning area over conflict region
+                        timingCtx.fillStyle = 'rgba(239, 68, 68, 0.15)';
+                        timingCtx.fillRect(x - 1, 10, 2, timingCanvas.height - 20);
+                        
+                        timingCtx.fillStyle = '#ef4444';
+                        timingCtx.fillText("POINTER CORRUPTION NODE", x - 50, 15);
+                    }
+                }
+            } else {
+                // Show DMA safe-zones
+                timingCtx.fillStyle = 'rgba(16, 185, 129, 0.15)';
+                timingCtx.fillRect(startX, 10, endX - startX, timingCanvas.height - 20);
+                timingCtx.fillStyle = '#10b981';
+                timingCtx.fillText("DMA STABLE RUNTIME", startX + 20, 15);
+            }
+
+            logicTime += 0.5;
+            requestAnimationFrame(drawTiming);
+        }
+        drawTiming();
+
+    </script>
+</body>
+</html>
