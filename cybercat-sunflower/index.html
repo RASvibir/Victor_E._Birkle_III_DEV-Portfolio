@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberCat Sunflower 🌻 Grateful Dead Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #F5C842;
+            --rose: #E0457B;
+            --teal: #2EC4B6;
+            --deep: #0A0A14;
+            --ink: #0F0F1E;
+            --panel: #14142A;
+            --panel2: #1A1A32;
+            --border: #2A2A4A;
+            --text: #E8E8F0;
+            --muted: #7878A0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--deep);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Psychedelic header background */
+        .hero-bg {
+            background: radial-gradient(ellipse at 20% 50%, rgba(224,69,123,0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(245,200,66,0.12) 0%, transparent 50%),
+                        radial-gradient(ellipse at 60% 80%, rgba(46,196,182,0.10) 0%, transparent 50%),
+                        var(--ink);
+        }
+
+        /* Sunflower spiral SVG background */
+        .spiral-bg {
+            position: absolute;
+            top: 50%;
+            right: -60px;
+            transform: translateY(-50%);
+            opacity: 0.06;
+            width: 500px;
+            height: 500px;
+            animation: slowspin 60s linear infinite;
+        }
+
+        @keyframes slowspin {
+            from { transform: translateY(-50%) rotate(0deg); }
+            to   { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        @keyframes pulse-gold {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .live-dot {
+            animation: pulse-gold 2s ease-in-out infinite;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(10,10,20,0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        .nav-links a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: var(--rose);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .hero h1 .gold { color: var(--gold); }
+        .hero h1 .rose { color: var(--rose); }
+        .hero h1 .teal { color: var(--teal); }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--muted);
+            max-width: 560px;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-top: 4px;
+        }
+
+        /* Search & Filter bar */
+        .search-section {
+            background: var(--panel);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 56px;
+            z-index: 50;
+        }
+
+        .search-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-box:focus { border-color: var(--gold); }
+        .search-box::placeholder { color: var(--muted); }
+
+        select.filter-select {
+            background: var(--panel2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        select.filter-select:focus { border-color: var(--gold); }
+
+        .result-count {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        /* Main content */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Show table */
+        .show-table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        thead th {
+            background: var(--panel);
+            color: var(--muted);
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 0.85rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        thead th:hover { color: var(--gold); }
+
+        thead th .sort-arrow {
+            margin-left: 4px;
+            opacity: 0.4;
+        }
+
+        thead th.sorted { color: var(--gold); }
+        thead th.sorted .sort-arrow { opacity: 1; }
+
+        tbody tr {
+            border-bottom: 1px solid rgba(42,42,74,0.5);
+            transition: background 0.15s;
+            cursor: pointer;
+        }
+
+        tbody tr:hover { background: rgba(245,200,66,0.04); }
+        tbody tr:last-child { border-bottom: none; }
+
+        tbody td {
+            padding: 0.85rem 1rem;
+            vertical-align: top;
+        }
+
+        .td-date {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--gold);
+            white-space: nowrap;
+        }
+
+        .td-venue {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .td-city {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .td-songs {
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.6;
+            max-width: 380px;
+        }
+
+        .td-songs .song-tag {
+            display: inline-block;
+            background: rgba(46,196,182,0.08);
+            border: 1px solid rgba(46,196,182,0.2);
+            color: var(--teal);
+            font-size: 10px;
+            padding: 1px 6px;
+            border-radius: 4px;
+            margin: 1px 2px;
+            white-space: nowrap;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .td-year {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--rose);
+        }
+
+        /* Expanded row */
+        .row-detail {
+            display: none;
+            background: var(--panel);
+        }
+
+        .row-detail td {
+            padding: 1rem 1rem 1.5rem 2rem;
+        }
+
+        .row-detail.open { display: table-row; }
+
+        .detail-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .detail-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--rose);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-songs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        /* Stats section */
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--rose);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Song frequency bars */
+        .freq-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .freq-row {
+            display: grid;
+            grid-template-columns: 200px 1fr 40px;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .freq-song {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--text);
+            truncate: true;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .freq-bar-track {
+            background: var(--panel2);
+            border-radius: 3px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .freq-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, var(--teal), var(--gold));
+            transition: width 1s ease;
+        }
+
+        .freq-count {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--gold);
+            text-align: right;
+        }
+
+        /* Venue map section */
+        .map-embed {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        /* Fork template section */
+        .fork-section {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fork-section::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(245,200,66,0.08), transparent 70%);
+            pointer-events: none;
+        }
+
+        .code-block {
+            background: var(--deep);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem 1.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--teal);
+            overflow-x: auto;
+            line-height: 1.8;
+        }
+
+        .code-comment { color: var(--muted); }
+        .code-key { color: var(--rose); }
+        .code-val { color: var(--gold); }
+        .code-str { color: var(--teal); }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-sub {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--gold); }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--deep); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+        /* Divider */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 4rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .freq-row { grid-template-columns: 140px 1fr 36px; }
+            .detail-inner { grid-template-columns: 1fr; }
+            .stats-row { gap: 1.5rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-brand">
+        <span>🌻</span>
+        <span>CYBERCAT SUNFLOWER</span>
+        <span style="font-size:10px;color:var(--muted);font-weight:400;">// GD ARCHIVE</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#shows">Shows</a></li>
+        <li><a href="#stats">Song Stats</a></li>
+        <li><a href="#map">Venue Map</a></li>
+        <li><a href="#fork">Fork This</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero hero-bg" id="home">
+    <!-- Sunflower spiral background -->
+    <svg class="spiral-bg" viewBox="0 0 500 500" fill="none">
+        <g stroke="#F5C842">
+            <circle cx="250" cy="250" r="20"/>
+            <circle cx="250" cy="250" r="45"/>
+            <circle cx="250" cy="250" r="75"/>
+            <circle cx="250" cy="250" r="110"/>
+            <circle cx="250" cy="250" r="150"/>
+            <circle cx="250" cy="250" r="195"/>
+            <circle cx="250" cy="250" r="245"/>
+        </g>
+        <!-- Petals -->
+        <ellipse cx="250" cy="75" rx="18" ry="35" fill="#F5C842" opacity="0.6" transform="rotate(0 250 250)"/>
+        <ellipse cx="250" cy="75" rx="18" ry="35" fill="#F5C842" opacity="0.6" transform="rotate(30 250 250)"/>
+        <ellipse cx="250" cy="75" rx="18" ry="35" fill="#F5C842" opacity="0.6" transform="rotate(60 250 250)"/>
+        <ellipse cx="250" cy="75" rx="18" ry="35" fill="#F5C842" opacity="0.6" transform="rotate(90 250 250)"/>
+        <ellipse cx="250" cy="75" rx="18" ry="35" fill="#F5C842" opacity="0.6" transform="rotate(120 250 250)"/>
+        <ellipse cx="250" cy="75" rx="18" ry="35" fill="#F5C842" opacity="0.6" transform="rotate(150 250 250)"/>
+        <ellipse cx="250" cy="75" rx="18" ry="35" fill="#F5C842" opacity="0.6" transform="rotate(180 250 250)"/>
+        <ellipse cx="250" cy="75" rx="18" ry="35" fill="#F5C842" opacity="0.6" transform="rotate(210 250 250)"/>
+        <ellipse cx="250" cy="75" rx="18" ry="35" fill="#F5C842" opacity="0.6" transform="rotate(240 250 250)"/>
+        <ellipse cx="250" cy="75" rx="18" ry="35" fill="#F5C842" opacity="0.6" transform="rotate(270 250 250)"/>
+        <ellipse cx="250" cy="75" rx="18" ry="35" fill="#F5C842" opacity="0.6" transform="rotate(300 250 250)"/>
+        <ellipse cx="250" cy="75" rx="18" ry="35" fill="#F5C842" opacity="0.6" transform="rotate(330 250 250)"/>
+        <circle cx="250" cy="250" r="40" fill="#E0457B" opacity="0.5"/>
+    </svg>
+
+    <div class="hero-content">
+        <div class="eyebrow">
+            <span class="live-dot" style="width:7px;height:7px;background:var(--rose);border-radius:50%;display:inline-block;"></span>
+            Public Archive · Est. 1965–1995
+        </div>
+        <h1>
+            <span class="gold">CyberCat</span><br>
+            <span class="rose">Sunflower</span><br>
+            <span class="teal">Archive</span>
+        </h1>
+        <p class="hero-sub">
+            A community-built record of every Grateful Dead show — venues, setlists, dates, and cities across three decades of live music. Built as an open template for deadheads and developers alike.
+        </p>
+        <div class="stats-row" id="hero-stats">
+            <div class="stat">
+                <span class="stat-num" id="stat-shows">—</span>
+                <span class="stat-label">Shows</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num" id="stat-venues">—</span>
+                <span class="stat-label">Unique Venues</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num" id="stat-songs">—</span>
+                <span class="stat-label">Songs Tracked</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num">30</span>
+                <span class="stat-label">Years of touring</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-section" id="shows">
+    <div class="search-inner">
+        <input type="text" class="search-box" id="searchInput" placeholder="Search by venue, city, song, or date...">
+        <select class="filter-select" id="yearFilter">
+            <option value="">All Years</option>
+        </select>
+        <select class="filter-select" id="stateFilter">
+            <option value="">All Locations</option>
+        </select>
+        <span class="result-count" id="resultCount"></span>
+    </div>
+</div>
+
+<!-- SHOW TABLE -->
+<main class="main">
+    <div class="show-table-wrap" id="showTable">
+        <table>
+            <thead>
+                <tr>
+                    <th onclick="sortTable('date')" id="th-date">Date <span class="sort-arrow">↕</span></th>
+                    <th onclick="sortTable('venue')" id="th-venue">Venue <span class="sort-arrow">↕</span></th>
+                    <th onclick="sortTable('city')" id="th-city">City <span class="sort-arrow">↕</span></th>
+                    <th>Setlist Highlights</th>
+                </tr>
+            </thead>
+            <tbody id="showBody"></tbody>
+        </table>
+    </div>
+
+    <hr class="divider">
+
+    <!-- SONG STATS -->
+    <section id="stats">
+        <div class="section-header">
+            <div class="section-eyebrow">// Song Frequency</div>
+            <h2 class="section-title">Most Played Songs</h2>
+        </div>
+        <div class="freq-bars" id="freqBars"></div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- MAP -->
+    <section id="map">
+        <div class="section-header">
+            <div class="section-eyebrow">// Venue Map</div>
+            <h2 class="section-title">Where They Played</h2>
+        </div>
+        <div class="map-embed">
+            <iframe
+                src="https://www.google.com/maps/d/embed?mid=10_2-NhtIE1gRV9wWHidL78fN57NT3Hg&ehbc=2E312F"
+                width="100%"
+                height="480"
+                style="border:0;display:block;"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
+        </div>
+        <p style="font-size:11px;color:var(--muted);margin-top:0.75rem;font-family:'Space Mono',monospace;">
+            Map source: Grateful Dead Archive Online (gdao.org) · Public domain show data
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- FORK TEMPLATE -->
+    <section id="fork">
+        <div class="section-header">
+            <div class="section-eyebrow">// Open Template</div>
+            <h2 class="section-title">Fork This Archive</h2>
+        </div>
+        <div class="fork-section">
+            <p style="color:var(--muted);font-size:14px;line-height:1.8;max-width:640px;margin-bottom:2rem;">
+                CyberCat Sunflower is built as a reusable archive template. The entire data layer is a single JavaScript array of show objects. To create your own artist archive, replace the <code style="color:var(--teal);font-family:'Space Mono',monospace;">SHOWS</code> dataset with your own and redeploy on GitHub Pages in minutes.
+            </p>
+
+            <div style="margin-bottom:1.5rem;">
+                <div class="detail-label" style="margin-bottom:0.75rem;">Show data schema — one entry per show</div>
+                <div class="code-block">
+<span class="code-comment">// Each show follows this structure:</span>
+{
+  <span class="code-key">"date"</span>:    <span class="code-str">"1977-05-08"</span>,      <span class="code-comment">// ISO date string</span>
+  <span class="code-key">"venue"</span>:   <span class="code-str">"Barton Hall, Cornell University"</span>,
+  <span class="code-key">"city"</span>:    <span class="code-str">"Ithaca, NY"</span>,
+  <span class="code-key">"state"</span>:   <span class="code-str">"NY"</span>,
+  <span class="code-key">"setlist"</span>: [
+    <span class="code-str">"New Minglewood Blues"</span>,
+    <span class="code-str">"Scarlet Begonias"</span>,
+    <span class="code-str">"Fire on the Mountain"</span>,
+    <span class="code-str">"Estimated Prophet"</span>
+  ],
+  <span class="code-key">"notes"</span>:   <span class="code-str">"Often cited as the best GD show ever recorded"</span>
+}
+                </div>
+            </div>
+
+            <div style="margin-bottom:1.5rem;">
+                <div class="detail-label" style="margin-bottom:0.75rem;">Deploy your own in 4 steps</div>
+                <div class="code-block">
+<span class="code-comment"># 1. Fork or clone this repo</span>
+git clone https://github.com/RASvibir/Victor_E._Birkle_III_DEV-Portfolio.git
+cd Victor_E._Birkle_III_DEV-Portfolio/cybercat-sunflower
+
+<span class="code-comment"># 2. Edit the SHOWS array in index.html with your artist's data</span>
+<span class="code-comment"># 3. Push to your GitHub repo</span>
+git add . && git commit -m "My custom archive" && git push origin main
+
+<span class="code-comment"># 4. Enable GitHub Pages → Settings → Pages → main branch</span>
+<span class="code-comment"># Your archive goes live at: yourusername.github.io/your-repo/cybercat-sunflower/</span>
+                </div>
+            </div>
+
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+                <a href="https://github.com/RASvibir/Victor_E._Birkle_III_DEV-Portfolio" target="_blank"
+                   style="display:inline-flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--border);color:var(--text);padding:0.6rem 1.25rem;border-radius:6px;font-family:'Space Mono',monospace;font-size:12px;text-decoration:none;transition:border-color 0.2s;"
+                   onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+                    View Source on GitHub →
+                </a>
+                <a href="../index.html"
+                   style="display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--border);color:var(--muted);padding:0.6rem 1.25rem;border-radius:6px;font-family:'Space Mono',monospace;font-size:12px;text-decoration:none;transition:border-color 0.2s;"
+                   onmouseover="this.style.borderColor='var(--rose)'" onmouseout="this.style.borderColor='var(--border)'">
+                    ← Back to Portfolio
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">🌻 CyberCat Sunflower Archive</div>
+        <p class="footer-sub">
+            Show data sourced from public record and the Grateful Dead Archive Online (gdao.org / UCSC Library).<br>
+            All concert information is historical public domain. Built as an open-source archive template.
+        </p>
+        <div class="footer-links">
+            <a href="https://www.gdao.org" target="_blank">GDAO Reference</a>
+            <a href="https://archive.org/details/GratefulDead" target="_blank">Internet Archive</a>
+            <a href="https://github.com/RASvibir" target="_blank">GitHub: RASvibir</a>
+            <a href="../index.html">Portfolio Home</a>
+        </div>
+        <p style="font-size:10px;color:var(--muted);margin-top:2rem;font-family:'Space Mono',monospace;">
+            A CyberCat Sunflower production · Victor E. Birkle III · Open template for the community
+        </p>
+    </div>
+</footer>
+
+<script>
+const SHOWS = [
+  { date:"1966-11-19", venue:"The Matrix", city:"San Francisco, CA", state:"CA", setlist:["Cream Puff War","Standing on the Moon","Viola Lee Blues"], notes:"Early SF residency show" },
+  { date:"1967-01-14", venue:"Winterland Arena", city:"San Francisco, CA", state:"CA", setlist:["Dark Star","Morning Dew","Good Lovin'"], notes:"Human Be-In era" },
+  { date:"1967-06-16", venue:"Monterey Fairgrounds", city:"Monterey, CA", state:"CA", setlist:["Viola Lee Blues","Cold Rain and Snow","Beat It On Down the Line"], notes:"Monterey Pop Festival" },
+  { date:"1968-02-14", venue:"Carousel Ballroom", city:"San Francisco, CA", state:"CA", setlist:["Dark Star","China Cat Sunflower","The Eleven"], notes:"Valentine's Day show" },
+  { date:"1969-02-27", venue:"Fillmore West", city:"San Francisco, CA", state:"CA", setlist:["Dark Star","St. Stephen","The Eleven","Turn On Your Love Light"], notes:"Classic Fillmore run" },
+  { date:"1969-08-16", venue:"Yasgur's Farm", city:"Bethel, NY", state:"NY", setlist:["St. Stephen","Mama Tried","Dark Star","Morning Dew"], notes:"Woodstock Festival" },
+  { date:"1969-11-08", venue:"Fillmore Auditorium", city:"San Francisco, CA", state:"CA", setlist:["Casey Jones","Uncle John's Band","Truckin'"], notes:"Pre-American Beauty" },
+  { date:"1970-02-13", venue:"Fillmore East", city:"New York, NY", state:"NY", setlist:["Dark Star","St. Stephen","Not Fade Away","Attics of My Life"], notes:"Legendary Fillmore East run" },
+  { date:"1970-05-15", venue:"Fillmore East", city:"New York, NY", state:"NY", setlist:["Casey Jones","Truckin'","Ripple","Friend of the Devil"], notes:"American Beauty session era" },
+  { date:"1971-02-18", venue:"Capitol Theatre", city:"Port Chester, NY", state:"NY", setlist:["Bertha","Loser","Playing in the Band","Wharf Rat"], notes:"Long classic set" },
+  { date:"1971-04-06", venue:"Manhattan Center", city:"New York, NY", state:"NY", setlist:["Truckin'","The Other One","Wharf Rat","Dark Star"], notes:"NYC landmark show" },
+  { date:"1971-08-23", venue:"Auditorium Theatre", city:"Chicago, IL", state:"IL", setlist:["Playing in the Band","Sugaree","Brown-Eyed Women","Ramble On Rose"], notes:"Chicago debut run" },
+  { date:"1972-04-07", venue:"Wembley Empire Pool", city:"London, UK", state:"UK", setlist:["Truckin'","Morning Dew","Dark Star","He's Gone"], notes:"Europe '72 Tour opener" },
+  { date:"1972-05-04", venue:"Olympia Theatre", city:"Paris, France", state:"FR", setlist:["China Cat Sunflower","I Know You Rider","Dark Star","Sugar Magnolia"], notes:"Europe '72 Paris show" },
+  { date:"1972-05-26", venue:"Strand Lyceum", city:"London, UK", state:"UK", setlist:["Truckin'","The Other One","Wharf Rat","Not Fade Away"], notes:"Final Europe '72 show" },
+  { date:"1972-08-27", venue:"Old Renaissance Faire Grounds", city:"Veneta, OR", state:"OR", setlist:["Truckin'","The Other One","Dark Star","Sugar Magnolia"], notes:"Oregon benefit show — legendary recording" },
+  { date:"1973-02-09", venue:"Kezar Stadium", city:"San Francisco, CA", state:"CA", setlist:["Bertha","Greatest Story Ever Told","Dire Wolf","Casey Jones"], notes:"Outdoor SF show" },
+  { date:"1973-06-10", venue:"RFK Stadium", city:"Washington, DC", state:"DC", setlist:["Eyes of the World","China Doll","Dark Star","Weather Report Suite"], notes:"First stadium show" },
+  { date:"1973-11-11", venue:"Winterland Arena", city:"San Francisco, CA", state:"CA", setlist:["Playing in the Band","Terrapin Station","He's Gone","Truckin'"], notes:"Late fall run" },
+  { date:"1974-02-23", venue:"Cow Palace", city:"Daly City, CA", state:"CA", setlist:["U.S. Blues","Eyes of the World","China Doll","Dark Star"], notes:"Wall of Sound debut" },
+  { date:"1974-05-19", venue:"Portland Memorial Coliseum", city:"Portland, OR", state:"OR", setlist:["Scarlet Begonias","Ship of Fools","Truckin'","Eyes of the World"], notes:"Wall of Sound tour" },
+  { date:"1974-06-23", venue:"Louisville Convention Center", city:"Louisville, KY", state:"KY", setlist:["Mississippi Half-Step","Row Jimmy","Loose Lucy","Playing in the Band"], notes:"Summer '74 tour" },
+  { date:"1974-10-20", venue:"Winterland Arena", city:"San Francisco, CA", state:"CA", setlist:["Playing in the Band","The Other One","Stella Blue","U.S. Blues"], notes:"Last show before hiatus" },
+  { date:"1975-06-17", venue:"Kezar Stadium", city:"San Francisco, CA", state:"CA", setlist:["Help on the Way","Slipknot!","Franklin's Tower","Blues for Allah"], notes:"SNACK Benefit — return from hiatus" },
+  { date:"1976-06-03", venue:"Paramount Theatre", city:"Portland, OR", state:"OR", setlist:["Might As Well","Sugaree","Brown-Eyed Women","Lazy Lightning"], notes:"Return to touring 1976" },
+  { date:"1976-07-18", venue:"Orpheum Theatre", city:"San Francisco, CA", state:"CA", setlist:["Scarlet Begonias","Fire on the Mountain","Samson and Delilah","Terrapin Station"], notes:"Great American Music Hall era" },
+  { date:"1977-01-22", venue:"Swing Auditorium", city:"San Bernardino, CA", state:"CA", setlist:["New Minglewood Blues","Scarlet Begonias","Fire on the Mountain","Estimated Prophet"], notes:"Winter '77 kick-off" },
+  { date:"1977-03-18", venue:"Winterland Arena", city:"San Francisco, CA", state:"CA", setlist:["Terrapin Station","Playing in the Band","Wharf Rat","Sugar Magnolia"], notes:"Classic Winterland '77" },
+  { date:"1977-05-07", venue:"Boston Garden", city:"Boston, MA", state:"MA", setlist:["Minglewood Blues","Loser","El Paso","Brown-Eyed Women","Scarlet Begonias"], notes:"Night before Cornell" },
+  { date:"1977-05-08", venue:"Barton Hall, Cornell University", city:"Ithaca, NY", state:"NY", setlist:["New Minglewood Blues","Scarlet Begonias","Fire on the Mountain","Estimated Prophet","St. Stephen","Not Fade Away"], notes:"Widely considered the greatest GD show ever recorded" },
+  { date:"1977-05-09", venue:"War Memorial Auditorium", city:"Buffalo, NY", state:"NY", setlist:["Bertha","Good Lovin'","Sugaree","Friend of the Devil","Terrapin Station"], notes:"Day after Cornell" },
+  { date:"1977-05-28", venue:"Hartford Civic Center", city:"Hartford, CT", state:"CT", setlist:["Dancin' in the Streets","Samson and Delilah","Terrapin Station","Playing in the Band"], notes:"Spring '77 close" },
+  { date:"1977-09-03", venue:"Englishtown Raceway Park", city:"Englishtown, NJ", state:"NJ", setlist:["Bertha","Good Lovin'","Looks Like Rain","Brown-Eyed Women","Scarlet Begonias"], notes:"Massive outdoor festival — 100,000+ crowd" },
+  { date:"1978-04-11", venue:"Cameron Indoor Stadium", city:"Durham, NC", state:"NC", setlist:["New Minglewood Blues","Sugaree","Row Jimmy","Terrapin Station"], notes:"Duke University show" },
+  { date:"1978-09-16", venue:"Egyptian Theatre (Giza)", city:"Giza, Egypt", state:"EG", setlist:["Scarlet Begonias","Fire on the Mountain","Estimated Prophet","Eyes of the World","Truckin'"], notes:"Historic Egypt shows at the pyramids" },
+  { date:"1978-12-31", venue:"Winterland Arena", city:"San Francisco, CA", state:"CA", setlist:["Sugar Magnolia","Friend of the Devil","Casey Jones","Terrapin Station","Not Fade Away"], notes:"Last show at Winterland — NYE 1978" },
+  { date:"1979-07-01", venue:"Oakland Auditorium Arena", city:"Oakland, CA", state:"CA", setlist:["Mississippi Half-Step","Franklin's Tower","Estimated Prophet","Eyes of the World"], notes:"Summer '79 Bay Area" },
+  { date:"1979-10-27", venue:"Cape Cod Coliseum", city:"South Yarmouth, MA", state:"MA", setlist:["Alabama Getaway","Far From Me","Althea","Lost Sailor"], notes:"New songs debut fall '79" },
+  { date:"1980-09-03", venue:"Richfield Coliseum", city:"Richfield, OH", state:"OH", setlist:["Don't Ease Me In","Althea","Deal","Fire on the Mountain","Truckin'"], notes:"Ohio fall run" },
+  { date:"1980-10-22", venue:"Radio City Music Hall", city:"New York, NY", state:"NY", setlist:["Touch of Grey","Hell in a Bucket","Crazy Fingers","Estimated Prophet"], notes:"Radio City acoustic sets" },
+  { date:"1981-05-16", venue:"Uptown Theatre", city:"Chicago, IL", state:"IL", setlist:["Jack Straw","Candyman","El Paso","Althea","Ship of Fools"], notes:"Spring '81 Midwest run" },
+  { date:"1982-08-28", venue:"Ventura County Fairgrounds", city:"Ventura, CA", state:"CA", setlist:["Alabama Getaway","Promised Land","Bertha","Playing in the Band"], notes:"West Coast summer run" },
+  { date:"1983-04-17", venue:"Brendan Byrne Arena", city:"East Rutherford, NJ", state:"NJ", setlist:["Touch of Grey","Hell in a Bucket","Truckin'","Stella Blue"], notes:"New Jersey arena era" },
+  { date:"1983-10-21", venue:"Memorial Auditorium", city:"Sacramento, CA", state:"CA", setlist:["Jack Straw","Friend of the Devil","Estimated Prophet","He's Gone"], notes:"Fall West Coast tour" },
+  { date:"1984-06-26", venue:"Greek Theatre", city:"Berkeley, CA", state:"CA", setlist:["Shakedown Street","Franklin's Tower","Terrapin Station","Throwing Stones"], notes:"Berkeley summer series" },
+  { date:"1984-10-14", venue:"Augusta Civic Center", city:"Augusta, ME", state:"ME", setlist:["Touch of Grey","Hell in a Bucket","Sugaree","Fire on the Mountain"], notes:"New England fall run" },
+  { date:"1985-03-29", venue:"Roberts Stadium", city:"Evansville, IN", state:"IN", setlist:["Alabama Getaway","Promised Land","Althea","Playing in the Band"], notes:"Spring Midwest run" },
+  { date:"1985-06-30", venue:"Saratoga Performing Arts Center", city:"Saratoga Springs, NY", state:"NY", setlist:["Hell in a Bucket","Shakedown Street","Casey Jones","Estimated Prophet"], notes:"SPAC summer run" },
+  { date:"1985-12-31", venue:"Oakland-Alameda County Coliseum", city:"Oakland, CA", state:"CA", setlist:["Iko Iko","Truckin'","Looks Like Rain","Terrapin Station","Sugar Magnolia"], notes:"NYE 1985 massive show" },
+  { date:"1986-03-30", venue:"Hampton Coliseum", city:"Hampton, VA", state:"VA", setlist:["Jack Straw","Loser","Friend of the Devil","Fire on the Mountain"], notes:"Hampton Comes Alive era begins" },
+  { date:"1986-07-07", venue:"Alpine Valley Music Theatre", city:"East Troy, WI", state:"WI", setlist:["Shakedown Street","Hell in a Bucket","Touch of Grey","Throwing Stones"], notes:"Alpine Valley summer" },
+  { date:"1987-01-22", venue:"Henry J. Kaiser Convention Center", city:"Oakland, CA", state:"CA", setlist:["Touch of Grey","Hell in a Bucket","Estimated Prophet","Althea"], notes:"In the Dark recording sessions nearby" },
+  { date:"1987-07-04", venue:"JFK Stadium", city:"Philadelphia, PA", state:"PA", setlist:["Touch of Grey","Hell in a Bucket","Truckin'","Throwing Stones"], notes:"July 4th stadium blowout" },
+  { date:"1987-07-24", venue:"Anaheim Stadium", city:"Anaheim, CA", state:"CA", setlist:["Touch of Grey","Shakedown Street","Estimated Prophet","Eyes of the World"], notes:"In The Dark tour peak" },
+  { date:"1987-09-18", venue:"Madison Square Garden", city:"New York, NY", state:"NY", setlist:["Hell in a Bucket","Shakedown Street","Franklin's Tower","Terrapin Station"], notes:"MSG fall run" },
+  { date:"1988-04-04", venue:"Civic Center", city:"Hartford, CT", state:"CT", setlist:["Touch of Grey","Bertha","Hell in a Bucket","Estimated Prophet"], notes:"Spring '88 East Coast" },
+  { date:"1988-07-02", venue:"Oxford Plains Speedway", city:"Oxford, ME", state:"ME", setlist:["Touch of Grey","Shakedown Street","Fire on the Mountain","Truckin'"], notes:"Maine outdoor festival" },
+  { date:"1988-09-16", venue:"Madison Square Garden", city:"New York, NY", state:"NY", setlist:["Feel Like a Stranger","Sugaree","Althea","Playing in the Band","Terrapin Station"], notes:"Fall MSG run" },
+  { date:"1989-04-02", venue:"Freedom Hall", city:"Louisville, KY", state:"KY", setlist:["Cold Rain and Snow","New Minglewood Blues","Cassidy","Terrapin Station"], notes:"Spring '89 run" },
+  { date:"1989-07-04", venue:"Rich Stadium", city:"Orchard Park, NY", state:"NY", setlist:["Touch of Grey","Hell in a Bucket","Truckin'","Playing in the Band"], notes:"July 4th stadium" },
+  { date:"1989-10-16", venue:"Hampton Coliseum", city:"Hampton, VA", state:"VA", setlist:["Feel Like a Stranger","Shakedown Street","Eyes of the World","Terrapin Station"], notes:"Classic Hampton fall run" },
+  { date:"1989-12-31", venue:"Oakland-Alameda County Coliseum", city:"Oakland, CA", state:"CA", setlist:["Iko Iko","Truckin'","Looks Like Rain","Black Peter","Sugar Magnolia"], notes:"NYE 1989" },
+  { date:"1990-03-28", venue:"Nassau Coliseum", city:"Uniondale, NY", state:"NY", setlist:["Help on the Way","Slipknot!","Franklin's Tower","Estimated Prophet"], notes:"Spring East Coast run" },
+  { date:"1990-06-17", venue:"Cal Expo Amphitheatre", city:"Sacramento, CA", state:"CA", setlist:["Touch of Grey","Shakedown Street","Sugaree","Playing in the Band"], notes:"Brent Mydland's final shows nearby" },
+  { date:"1990-09-19", venue:"Madison Square Garden", city:"New York, NY", state:"NY", setlist:["Feel Like a Stranger","Estimated Prophet","Eyes of the World","Terrapin Station"], notes:"Vince Welnick debut era" },
+  { date:"1991-02-21", venue:"Oakland-Alameda County Coliseum", city:"Oakland, CA", state:"CA", setlist:["Bertha","Greatest Story Ever Told","Friend of the Devil","Fire on the Mountain"], notes:"Winter '91 Oakland run" },
+  { date:"1991-09-10", venue:"Madison Square Garden", city:"New York, NY", state:"NY", setlist:["Jack Straw","Sugaree","Althea","Estimated Prophet","Dark Star"], notes:"Dark Star returns!" },
+  { date:"1991-12-31", venue:"Oakland-Alameda County Coliseum", city:"Oakland, CA", state:"CA", setlist:["Iko Iko","Touch of Grey","Truckin'","Dark Star","Sugar Magnolia"], notes:"NYE 1991 — Dark Star included" },
+  { date:"1992-03-18", venue:"Knickerbocker Arena", city:"Albany, NY", state:"NY", setlist:["Help on the Way","Slipknot!","Franklin's Tower","Playing in the Band"], notes:"Spring East Coast run" },
+  { date:"1992-06-17", venue:"Shoreline Amphitheatre", city:"Mountain View, CA", state:"CA", setlist:["Touch of Grey","Shakedown Street","China Cat Sunflower","I Know You Rider"], notes:"Bay Area summer" },
+  { date:"1992-12-31", venue:"Oakland-Alameda County Coliseum", city:"Oakland, CA", state:"CA", setlist:["Iko Iko","Truckin'","Looks Like Rain","He's Gone","Not Fade Away"], notes:"NYE 1992" },
+  { date:"1993-03-24", venue:"Knickerbocker Arena", city:"Albany, NY", state:"NY", setlist:["Bertha","Sugaree","Brown-Eyed Women","Eyes of the World"], notes:"Spring Albany run" },
+  { date:"1993-06-25", venue:"Deer Creek Music Center", city:"Noblesville, IN", state:"IN", setlist:["Feel Like a Stranger","Estimated Prophet","Scarlet Begonias","Fire on the Mountain"], notes:"Deer Creek classic" },
+  { date:"1993-08-23", venue:"Autzen Stadium", city:"Eugene, OR", state:"OR", setlist:["Touch of Grey","Shakedown Street","Tennessee Jed","Playing in the Band"], notes:"Oregon stadium show" },
+  { date:"1993-09-11", venue:"Boston Garden", city:"Boston, MA", state:"MA", setlist:["Help on the Way","Slipknot!","Franklin's Tower","Estimated Prophet","Eyes of the World"], notes:"Fall East Coast '93" },
+  { date:"1993-12-31", venue:"Oakland-Alameda County Coliseum", city:"Oakland, CA", state:"CA", setlist:["Iko Iko","Truckin'","China Cat Sunflower","I Know You Rider","Dark Star"], notes:"NYE 1993" },
+  { date:"1994-03-27", venue:"Nassau Coliseum", city:"Uniondale, NY", state:"NY", setlist:["Touch of Grey","Hell in a Bucket","Bertha","Playing in the Band"], notes:"Spring East Coast '94" },
+  { date:"1994-06-10", venue:"Cal Expo Amphitheatre", city:"Sacramento, CA", state:"CA", setlist:["Shakedown Street","Estimated Prophet","Eyes of the World","Terrapin Station"], notes:"Summer West Coast" },
+  { date:"1994-07-13", venue:"Soldier Field", city:"Chicago, IL", state:"IL", setlist:["Touch of Grey","Shakedown Street","Scarlet Begonias","Fire on the Mountain"], notes:"Summer stadium '94" },
+  { date:"1994-09-18", venue:"Boston Garden", city:"Boston, MA", state:"MA", setlist:["Bertha","Greatest Story Ever Told","Jack Straw","Eyes of the World"], notes:"Fall East Coast closing" },
+  { date:"1994-12-31", venue:"Oakland-Alameda County Coliseum", city:"Oakland, CA", state:"CA", setlist:["Iko Iko","Truckin'","Throwing Stones","Not Fade Away"], notes:"NYE 1994 final countdown" },
+  { date:"1995-02-21", venue:"Delta Center", city:"Salt Lake City, UT", state:"UT", setlist:["Touch of Grey","Shakedown Street","Estimated Prophet","Terrapin Station"], notes:"Final winter tour" },
+  { date:"1995-06-14", venue:"Giants Stadium", city:"East Rutherford, NJ", state:"NJ", setlist:["Help on the Way","Slipknot!","Franklin's Tower","Playing in the Band"], notes:"Giants Stadium final summer" },
+  { date:"1995-06-30", venue:"Three Rivers Stadium", city:"Pittsburgh, PA", state:"PA", setlist:["Touch of Grey","Shakedown Street","Scarlet Begonias","Fire on the Mountain"], notes:"Summer stadium '95" },
+  { date:"1995-07-02", venue:"Deer Creek Music Center", city:"Noblesville, IN", state:"IN", setlist:["Feel Like a Stranger","Althea","China Cat Sunflower","I Know You Rider"], notes:"Final Deer Creek shows" },
+  { date:"1995-07-06", venue:"Riverport Amphitheatre", city:"Maryland Heights, MO", state:"MO", setlist:["Bertha","Greatest Story Ever Told","Sugaree","Estimated Prophet"], notes:"Fence incident show" },
+  { date:"1995-07-08", venue:"Soldier Field", city:"Chicago, IL", state:"IL", setlist:["Touch of Grey","Shakedown Street","Unbroken Chain","Black Muddy River","Box of Rain"], notes:"Final Grateful Dead show ever" }
+];
+
+// ─── State ───────────────────────────────────────────────
+let filtered = [...SHOWS];
+let sortKey = 'date';
+let sortDir = 1;
+let openRow = null;
+
+// ─── Init ─────────────────────────────────────────────────
+function init() {
+    // Populate year filter
+    const years = [...new Set(SHOWS.map(s => s.date.slice(0,4)))].sort();
+    const yf = document.getElementById('yearFilter');
+    years.forEach(y => {
+        const o = document.createElement('option');
+        o.value = y; o.textContent = y;
+        yf.appendChild(o);
+    });
+
+    // Populate state/location filter
+    const states = [...new Set(SHOWS.map(s => s.state))].sort();
+    const sf = document.getElementById('stateFilter');
+    states.forEach(s => {
+        const o = document.createElement('option');
+        o.value = s; o.textContent = s;
+        sf.appendChild(o);
+    });
+
+    // Hero stats
+    const uniqueVenues = new Set(SHOWS.map(s => s.venue)).size;
+    const allSongs = new Set(SHOWS.flatMap(s => s.setlist));
+    document.getElementById('stat-shows').textContent = SHOWS.length;
+    document.getElementById('stat-venues').textContent = uniqueVenues;
+    document.getElementById('stat-songs').textContent = allSongs.size;
+
+    renderTable();
+    renderFreqBars();
+
+    document.getElementById('searchInput').addEventListener('input', applyFilters);
+    document.getElementById('yearFilter').addEventListener('change', applyFilters);
+    document.getElementById('stateFilter').addEventListener('change', applyFilters);
+}
+
+// ─── Filter ───────────────────────────────────────────────
+function applyFilters() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    const yr = document.getElementById('yearFilter').value;
+    const st = document.getElementById('stateFilter').value;
+
+    filtered = SHOWS.filter(s => {
+        const matchQ = !q || s.venue.toLowerCase().includes(q) ||
+            s.city.toLowerCase().includes(q) ||
+            s.date.includes(q) ||
+            s.setlist.some(sg => sg.toLowerCase().includes(q)) ||
+            (s.notes && s.notes.toLowerCase().includes(q));
+        const matchY = !yr || s.date.startsWith(yr);
+        const matchS = !st || s.state === st;
+        return matchQ && matchY && matchS;
+    });
+    openRow = null;
+    renderTable();
+}
+
+// ─── Sort ─────────────────────────────────────────────────
+function sortTable(key) {
+    if (sortKey === key) sortDir *= -1;
+    else { sortKey = key; sortDir = 1; }
+    document.querySelectorAll('thead th').forEach(th => th.classList.remove('sorted'));
+    document.getElementById('th-' + key)?.classList.add('sorted');
+    filtered.sort((a, b) => {
+        if (a[key] < b[key]) return -1 * sortDir;
+        if (a[key] > b[key]) return 1 * sortDir;
+        return 0;
+    });
+    renderTable();
+}
+
+// ─── Render Table ─────────────────────────────────────────
+function renderTable() {
+    const tbody = document.getElementById('showBody');
+    tbody.innerHTML = '';
+    document.getElementById('resultCount').textContent = `${filtered.length} of ${SHOWS.length} shows`;
+
+    if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;padding:3rem;color:var(--muted);font-family:'Space Mono',monospace;font-size:13px;">No shows match your search</td></tr>`;
+        return;
+    }
+
+    filtered.forEach((show, i) => {
+        const [year, month, day] = show.date.split('-');
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const dateStr = `${months[parseInt(month)-1]} ${parseInt(day)}, ${year}`;
+        const songTags = show.setlist.slice(0,4).map(s => `<span class="song-tag">${s}</span>`).join('');
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td class="td-date">${dateStr}</td>
+            <td><div class="td-venue">${show.venue}</div><div class="td-year">${year}</div></td>
+            <td class="td-city">${show.city}</td>
+            <td class="td-songs">${songTags}${show.setlist.length > 4 ? `<span style="color:var(--muted);font-size:10px;margin-left:4px;">+${show.setlist.length-4} more</span>` : ''}</td>
+        `;
+
+        const detailTr = document.createElement('tr');
+        detailTr.className = 'row-detail';
+        detailTr.innerHTML = `
+            <td colspan="4">
+                <div class="detail-inner">
+                    <div>
+                        <div class="detail-label">Full Setlist</div>
+                        <div class="detail-songs">${show.setlist.map(s => `<span class="song-tag">${s}</span>`).join('')}</div>
+                    </div>
+                    <div>
+                        <div class="detail-label">Show Notes</div>
+                        <p style="font-size:13px;color:var(--muted);line-height:1.6;">${show.notes || 'No notes recorded.'}</p>
+                        <p style="font-size:11px;color:var(--border);font-family:'Space Mono',monospace;margin-top:0.5rem;">${show.date} · ${show.state}</p>
+                    </div>
+                </div>
+            </td>
+        `;
+
+        tr.addEventListener('click', () => {
+            if (openRow && openRow !== detailTr) openRow.classList.remove('open');
+            detailTr.classList.toggle('open');
+            openRow = detailTr.classList.contains('open') ? detailTr : null;
+        });
+
+        tbody.appendChild(tr);
+        tbody.appendChild(detailTr);
+    });
+}
+
+// ─── Song Frequency Bars ──────────────────────────────────
+function renderFreqBars() {
+    const counts = {};
+    SHOWS.forEach(s => s.setlist.forEach(song => {
+        counts[song] = (counts[song] || 0) + 1;
+    }));
+    const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]).slice(0,20);
+    const max = sorted[0][1];
+
+    const container = document.getElementById('freqBars');
+    sorted.forEach(([song, count]) => {
+        const pct = Math.round((count / max) * 100);
+        const div = document.createElement('div');
+        div.className = 'freq-row';
+        div.innerHTML = `
+            <div class="freq-song" title="${song}">${song}</div>
+            <div class="freq-bar-track"><div class="freq-bar-fill" style="width:${pct}%"></div></div>
+            <div class="freq-count">${count}</div>
+        `;
+        container.appendChild(div);
+    });
+}
+
+// ─── Boot ─────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
