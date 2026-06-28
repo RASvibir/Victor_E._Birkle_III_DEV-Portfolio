@@ -1,0 +1,6 @@
+*.o
+*.out
+build/
+uXu_test_runner
+.DS_Store
+Thumbs.db
